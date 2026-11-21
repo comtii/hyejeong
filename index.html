@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함께 성장하는 3학년 6반</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- 상단 네비게이션 바 -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <span class="text-2xl">🌱</span>
+                <h1 class="text-lg font-bold text-indigo-600">3학년 6반</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <button onclick="switchTab('home')" id="nav-home" class="hover:text-indigo-600 transition text-indigo-600 font-semibold">홈</button>
+                <button onclick="switchTab('notice')" id="nav-notice" class="hover:text-indigo-600 transition">알림장</button>
+                <button onclick="switchTab('board')" id="nav-board" class="hover:text-indigo-600 transition">게시판</button>
+                <button onclick="switchTab('album')" id="nav-album" class="hover:text-indigo-600 transition">앨범게시판</button>
+                <button onclick="switchTab('archive')" id="nav-archive" class="hover:text-indigo-600 transition">자료실</button>
+            </nav>
+            <div>
+                <button onclick="openModal('loginModal')" class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition shadow-sm">
+                    로그인
+                </button>
+            </div>
+        </div>
+        <!-- 모바일 네비게이션 -->
+        <div class="flex md:hidden border-t border-slate-100 px-2 py-2 justify-around text-xs font-medium text-slate-600">
+            <button onclick="switchTab('home')" class="mobile-nav-btn text-indigo-600 font-bold">홈</button>
+            <button onclick="switchTab('notice')" class="mobile-nav-btn">알림장</button>
+            <button onclick="switchTab('board')" class="mobile-nav-btn">게시판</button>
+            <button onclick="switchTab('album')" class="mobile-nav-btn">앨범</button>
+            <button onclick="switchTab('archive')" class="mobile-nav-btn">자료실</button>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- [TAB 1] 홈 화면 -->
+        <div id="tab-home" class="space-y-8">
+            <!-- 히어로 배너 -->
+            <section class="bg-gradient-to-r from-indigo-500 to-sky-400 text-white py-12 px-6 rounded-3xl shadow-md text-center space-y-4">
+                <span class="bg-white/25 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Our Happy Classroom</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">함께 성장하는 행복한 3학년 6반</h2>
+                <p class="text-indigo-100 text-sm md:text-base max-w-xl mx-auto">
+                    서로를 존중하고 배려하며 꿈을 향해 나아가는 우리들의 멋진 공간입니다.
+                </p>
+                <div class="pt-2 flex justify-center space-x-3">
+                    <button onclick="switchTab('notice')" class="bg-white text-indigo-600 font-semibold px-5 py-2 rounded-xl shadow hover:bg-indigo-50 transition text-sm">알림장 보기</button>
+                    <button onclick="switchTab('album')" class="bg-indigo-700/50 border border-white/30 text-white font-semibold px-5 py-2 rounded-xl hover:bg-indigo-700 transition text-sm">추억 앨범</button>
+                </div>
+            </section>
+
+            <!-- 주요 요약 그리드 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 오늘의 알림장 요약 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 md:col-span-2 space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>📢</span> 최신 알림장</h3>
+                        <button onclick="switchTab('notice')" class="text-xs text-indigo-600 font-semibold hover:underline">전체보기 +</button>
+                    </div>
+                    <div class="space-y-3" id="home-notice-list">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <span class="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded font-semibold mr-2">필독</span>
+                                <span class="text-sm font-medium text-slate-700">이번 주 과학 실험 수행평가 안내</span>
+                            </div>
+                            <span class="text-xs text-slate-400">2026.11.11</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-0.5 rounded font-semibold mr-2">안내</span>
+                                <span class="text-sm text-slate-700">체육복 및 실내화 정돈 철저</span>
+                            </div>
+                            <span class="text-xs text-slate-400">2026.11.10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오늘의 급식 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
+                    <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>🍱</span> 오늘의 급식</h3>
+                    <ul class="text-xs space-y-2 text-slate-600 bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
+                        <li class="font-semibold text-emerald-800">✨ 현미밥 / 쇠고기미역국</li>
+                        <li>🍗 닭다리살 치킨구이</li>
+                        <li>🥗 도토리묵채소무침</li>
+                        <li>🥬 배추김치 / 🍎 사과주스</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- [TAB 2] 알림장 -->
+        <div id="tab-notice" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">📢 학급 알림장</h2>
+                    <p class="text-xs text-slate-500 mt-1">선생님께서 올려주시는 소중한 알림과 준비물을 확인하세요.</p>
+                </div>
+                <button onclick="openModal('writeNoticeModal')" class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-xl font-medium hover:bg-indigo-700 transition">글쓰기 (선생님)</button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="divide-y divide-slate-100" id="notice-container">
+                    <div class="p-4 hover:bg-slate-50 transition cursor-pointer">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded font-semibold">필독</span>
+                            <span class="text-xs text-slate-400">2026.11.11 | 조회수 24</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-base">이번 주 과학 실험 수행평가 안내</h4>
+                        <p class="text-xs text-slate-600 mt-1">모둠별 준비물을 반드시 확인하고 지참해 주세요. 결석생은 별도 일정을 안내합니다.</p>
+                    </div>
+                    <div class="p-4 hover:bg-slate-50 transition cursor-pointer">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-0.5 rounded font-semibold">안내</span>
+                            <span class="text-xs text-slate-400">2026.11.10 | 조회수 31</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-base">체육복 및 교실 환경 정돈 안내</h4>
+                        <p class="text-xs text-slate-600 mt-1">체육 수업이 있는 날에는 규정된 체육복을 정확히 착용하기 바랍니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [TAB 3] 게시판 (자유게시판) -->
+        <div id="tab-board" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">💬 우리들 게시판</h2>
+                    <p class="text-xs text-slate-500 mt-1">친구들과 자유롭게 이야기를 나누는 공간입니다. 예쁜 말을 사용해요!</p>
+                </div>
+                <button onclick="openModal('writeBoardModal')" class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-xl font-medium hover:bg-indigo-700 transition">글쓰기</button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="divide-y divide-slate-100" id="board-container">
+                    <div class="p-4 hover:bg-slate-50 transition flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">이번 주 체육시간에 피구 할 사람?</h4>
+                            <p class="text-xs text-slate-500 mt-1">작성자: 김민수 | 2026.11.11</p>
+                        </div>
+                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">댓글 3</span>
+                    </div>
+                    <div class="p-4 hover:bg-slate-50 transition flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">점심 메뉴 너무 맛있었어요 👍</h4>
+                            <p class="text-xs text-slate-500 mt-1">작성자: 이서연 | 2026.11.10</p>
+                        </div>
+                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">댓글 5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [TAB 4] 앨범게시판 -->
+        <div id="tab-album" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">📸 앨범게시판</h2>
+                    <p class="text-xs text-slate-500 mt-1">우리 6반의 즐거운 추억과 활동 사진을 모아둔 곳입니다.</p>
+                </div>
+                <button onclick="openModal('writeAlbumModal')" class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-xl font-medium hover:bg-indigo-700 transition">사진 올리기</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="album-container">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="h-40 bg-slate-200 flex items-center justify-center text-slate-400 font-medium">체육대회 단체 사진</div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 text-sm">가을 체육대회 종합 우승!</h4>
+                        <p class="text-xs text-slate-500 mt-1">2026.10.25 · 3학년 6반</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="h-40 bg-slate-200 flex items-center justify-center text-slate-400 font-medium">현장체험학습 현장</div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 text-sm">국립박물관 체험학습</h4>
+                        <p class="text-xs text-slate-500 mt-1">2026.09.15 · 3학년 6반</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [TAB 5] 자료실 -->
+        <div id="tab-archive" class="hidden space-y-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">📂 학급 자료실</h2>
+                    <p class="text-xs text-slate-500 mt-1">수업 학습지, 가정통신문, 양식 등을 다운로드할 수 있습니다.</p>
+                </div>
+                <button onclick="openModal('writeArchiveModal')" class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-xl font-medium hover:bg-indigo-700 transition">자료 올리기</button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="divide-y divide-slate-100" id="archive-container">
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-50 transition">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📄</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">2학기 진로 상담 신청서 양식.hwp</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">용량: 120KB · 등록일: 2026.11.02</p>
+                            </div>
+                        </div>
+                        <button onclick="downloadAlert()" class="bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-xs font-semibold px-3 py-1.5 rounded-lg transition">다운로드</button>
+                    </div>
+                    <div class="p-4 flex justify-between items-center hover:bg-slate-50 transition">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📊</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">사회과 프로젝트 학습 안내문.pdf</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">용량: 1.4MB · 등록일: 2026.10.20</p>
+                            </div>
+                        </div>
+                        <button onclick="downloadAlert()" class="bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-xs font-semibold px-3 py-1.5 rounded-lg transition">다운로드</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-1">
+            <p class="font-medium text-slate-700">함께 성장하는 행복한 3학년 6반 교실</p>
+            <p>Copyright © 3-6 Class. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 알림 메시지 박스 (Alert 대안) -->
+    <div id="msgBox" class="fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        성공적으로 처리되었습니다!
+    </div>
+
+    <!-- 글쓰기 / 로그인 모달 창들 -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-xl">
+            <h3 class="font-bold text-lg text-slate-800">로그인</h3>
+            <div class="space-y-3">
+                <input type="text" id="loginId" placeholder="아이디 또는 학번" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600">
+                <input type="password" placeholder="비밀번호" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600">
+            </div>
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeModal('loginModal')" class="px-4 py-2 rounded-xl text-sm bg-slate-100 text-slate-600 hover:bg-slate-200">취소</button>
+                <button onclick="handleLogin()" class="px-4 py-2 rounded-xl text-sm bg-indigo-600 text-white hover:bg-indigo-700">로그인</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="writeBoardModal" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl">
+            <h3 class="font-bold text-lg text-slate-800">자유게시판 글쓰기</h3>
+            <div class="space-y-3">
+                <input type="text" id="boardTitle" placeholder="제목을 입력하세요" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600">
+                <input type="text" id="boardAuthor" placeholder="작성자 이름" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600">
+                <textarea id="boardContent" rows="4" placeholder="내용을 입력하세요" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600 resize-none"></textarea>
+            </div>
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeModal('writeBoardModal')" class="px-4 py-2 rounded-xl text-sm bg-slate-100 text-slate-600 hover:bg-slate-200">취소</button>
+                <button onclick="addBoardPost()" class="px-4 py-2 rounded-xl text-sm bg-indigo-600 text-white hover:bg-indigo-700">등록</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="writeNoticeModal" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl">
+            <h3 class="font-bold text-lg text-slate-800">알림장 작성 (선생님용)</h3>
+            <div class="space-y-3">
+                <input type="text" id="noticeTitle" placeholder="알림장 제목" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600">
+                <textarea id="noticeContent" rows="4" placeholder="알림 내용" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-indigo-600 resize-none"></textarea>
+            </div>
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeModal('writeNoticeModal')" class="px-4 py-2 rounded-xl text-sm bg-slate-100 text-slate-600 hover:bg-slate-200">취소</button>
+                <button onclick="addNoticePost()" class="px-4 py-2 rounded-xl text-sm bg-indigo-600 text-white hover:bg-indigo-700">등록</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 자바스크립트 상호작용 로직 -->
+    <script>
+        // 탭 전환 함수
+        function switchTab(tabId) {
+            const tabs = ['home', 'notice', 'board', 'album', 'archive'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if (el) el.classList.add('hidden');
+                const navEl = document.getElementById('nav-' + t);
+                if (navEl) {
+                    navEl.classList.remove('text-indigo-600', 'font-semibold');
+                    navEl.classList.add('text-slate-600');
+                }
+            });
+
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) targetTab.classList.remove('hidden');
+
+            const targetNav = document.getElementById('nav-' + tabId);
+            if (targetNav) {
+                targetNav.classList.remove('text-slate-600');
+                targetNav.classList.add('text-indigo-600', 'font-semibold');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 모달창 제어
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // 안내 메시지 표시 함수 (alert 대신 사용)
+        function showMessage(text) {
+            const box = document.getElementById('msgBox');
+            box.innerText = text;
+            box.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                box.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function downloadAlert() {
+            showMessage("자료 다운로드가 시작되었습니다.");
+        }
+
+        function handleLogin() {
+            closeModal('loginModal');
+            showMessage("성공적으로 로그인되었습니다.");
+        }
+
+        // 게시글 추가 예시 기능
+        function addBoardPost() {
+            const title = document.getElementById('boardTitle').value;
+            const author = document.getElementById('boardAuthor').value;
+            const content = document.getElementById('boardContent').value;
+            if(!title || !author) {
+                showMessage("제목과 작성자를 입력해주세요.");
+                return;
+            }
+
+            const container = document.getElementById('board-container');
+            const newPost = document.createElement('div');
+            newPost.className = "p-4 hover:bg-slate-50 transition flex justify-between items-center";
+            newPost.innerHTML = `
+                <div>
+                    <h4 class="font-bold text-slate-800 text-sm">${title}</h4>
+                    <p class="text-xs text-slate-500 mt-1">작성자: ${author} | 방금 전</p>
+                </div>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">댓글 0</span>
+            `;
+            container.prepend(newPost);
+            closeModal('writeBoardModal');
+            document.getElementById('boardTitle').value = '';
+            document.getElementById('boardAuthor').value = '';
+            document.getElementById('boardContent').value = '';
+            showMessage("게시글이 등록되었습니다.");
+        }
+
+        function addNoticePost() {
+            const title = document.getElementById('noticeTitle').value;
+            const content = document.getElementById('noticeContent').value;
+            if(!title) {
+                showMessage("제목을 입력해주세요.");
+                return;
+            }
+
+            const container = document.getElementById('notice-container');
+            const newNotice = document.createElement('div');
+            newNotice.className = "p-4 hover:bg-slate-50 transition cursor-pointer";
+            newNotice.innerHTML = `
+                <div class="flex justify-between items-center mb-1">
+                    <span class="bg-indigo-100 text-indigo-600 text-xs px-2 py-0.5 rounded font-semibold">공지</span>
+                    <span class="text-xs text-slate-400">방금 전 | 조회수 1</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-base">${title}</h4>
+                <p class="text-xs text-slate-600 mt-1">${content}</p>
+            `;
+            container.prepend(newNotice);
+            closeModal('writeNoticeModal');
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeContent').value = '';
+            showMessage("알림장이 등록되었습니다.");
+        }
+    </script>
+</body>
+</html>
